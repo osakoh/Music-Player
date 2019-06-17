@@ -14,27 +14,37 @@ txt.pack()
 
 
 # *************************************************** Multimedia functions *********************************************
-def playmsc():
-    mixer.music.load("hello.wav")
+def play_msc():
+    mixer.music.load("raise.mp3")
     mixer.music.play()
 
 
-def stopmsc():
+def stop_msc():
     mixer.music.stop()
 
 
+def vol_ctrl(val):
+    volume = int(val)/100  # convert the val string to int 
+    mixer.music.set_volume(volume)  # set_volume accepts values between 0 and 1
+   
 # ********************************************** End of multimedia functions *******************************************
 
 
-# ************************************************** Multimedia buttons ************************************************
+# ************************************************** Multimedia controls ***********************************************
 playPhoto = PhotoImage(file='img/play.png')
-playBtn = Button(root, image=playPhoto, command=playmsc)
+playBtn = Button(root, image=playPhoto, command=play_msc)
 playBtn.pack()
 
 stopPhoto = PhotoImage(file='img/stop.png')
-stopBtn = Button(root, image=stopPhoto, command=stopmsc)
+stopBtn = Button(root, image=stopPhoto, command=stop_msc)
 stopBtn.pack()
-# *********************************************** End of Multimedia button *********************************************
+
+volScale = Scale(root, from_=0, to=125, orient=HORIZONTAL, command=vol_ctrl)
+volScale.set(80)
+volScale.pack()
+
+
+# *********************************************** End of Multimedia controls *********************************************
 
 # **********************************************************************************************************************
 # **********************************************************************************************************************
