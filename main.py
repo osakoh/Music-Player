@@ -1,9 +1,13 @@
 from tkinter import *
+from pygame import mixer
 
 
 root = Tk()  # creates a window
 root.title("Music Player")
 root.iconbitmap(r'img/red-audio.ico')
+
+# initialise mixer
+mixer.init()
 
 txt = Label(root, text='Music is playing')
 txt.pack()
