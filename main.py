@@ -1,27 +1,40 @@
 from tkinter import *
 from pygame import mixer
 
+# initialise mixer
+mixer.init()
 
 root = Tk()  # creates a window
 root.title("Music Player")
 root.iconbitmap(r'img/red-audio.ico')
 
-# initialise mixer
-mixer.init()
 
 txt = Label(root, text='Music is playing')
 txt.pack()
 
 
-# **************************************************** Play button *****************************************************
-def playbtn():
-    print("It's working")
+# *************************************************** Multimedia functions *********************************************
+def playmsc():
+    mixer.music.load("hello.wav")
+    mixer.music.play()
 
 
-photo = PhotoImage(file='img/play.png')
-playBtn = Button(root, image=photo, command=playbtn)
+def stopmsc():
+    mixer.music.stop()
+
+
+# ********************************************** End of multimedia functions *******************************************
+
+
+# ************************************************** Multimedia buttons ************************************************
+playPhoto = PhotoImage(file='img/play.png')
+playBtn = Button(root, image=playPhoto, command=playmsc)
 playBtn.pack()
-# ************************************************* End of Play button *************************************************
+
+stopPhoto = PhotoImage(file='img/stop.png')
+stopBtn = Button(root, image=stopPhoto, command=stopmsc)
+stopBtn.pack()
+# *********************************************** End of Multimedia button *********************************************
 
 # **********************************************************************************************************************
 # **********************************************************************************************************************
@@ -52,6 +65,8 @@ playBtn.pack()
 
 # **********************************************************************************************************************
 # **********************************************************************************************************************
+
+
 
 
 
