@@ -1,6 +1,9 @@
 from tkinter import *
 from pygame import mixer
 
+import tkinter.messagebox
+
+
 # initialise mixer
 mixer.init()
 
@@ -51,15 +54,27 @@ menuBar = Menu(root)  # creates an empty menu bar
 root.config(menu=menuBar)
 # ************************************************* End of Menu bar ****************************************************
 
+
+# ************************************************** Menu functions ****************************************************
+def about():
+    tkinter.messagebox.showinfo('Info', 'Music player written with Python.')
+
+# *********************************************** End of menu functions ************************************************
+
+
 # ************************************************* Submenu bar ********************************************************
-subMenu = Menu(menuBar)
+subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='File', menu=subMenu)  # for the menu bar
 subMenu.add_command(label='Open')  # create the drop down menu for File
 subMenu.add_command(label='Exit')  # create the drop down menu for File
+
+subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
+menuBar.add_cascade(label='Help', menu=subMenu)  # for the menu bar
+subMenu.add_command(label='Contact')  # create the drop down menu for File
+subMenu.add_command(label='About Software', command=about)  # create the drop down menu for File
+
 # ************************************************* End of Submenu bar *************************************************
 
-# **********************************************************************************************************************
-# **********************************************************************************************************************
 
 # **********************************************************************************************************************
 # **********************************************************************************************************************
