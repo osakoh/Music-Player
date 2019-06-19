@@ -66,7 +66,7 @@ def about():
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='File', menu=subMenu)  # for the menu bar
 subMenu.add_command(label='Open')  # create the drop down menu for File
-subMenu.add_command(label='Exit')  # create the drop down menu for File
+subMenu.add_command(label='Exit', command=root.destroy)  # create the drop down menu for File
 
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='Help', menu=subMenu)  # for the menu bar
