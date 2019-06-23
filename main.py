@@ -1,7 +1,9 @@
+import os
 from tkinter import *
 from pygame import mixer
-
+from tkinter import filedialog
 import tkinter.messagebox
+import os
 
 
 # initialise mixer
@@ -18,18 +20,23 @@ txt.pack()
 
 # *************************************************** Multimedia functions *********************************************
 def play_msc():
-    mixer.music.load("raise.mp3")
-    mixer.music.play()
+    try:
+        mixer.music.load(filename)
+        mixer.music.play()
+        statusBar['text'] = "Playing Music" + ' : ' + os.path.basename(filename)
+    except:
+        tkinter.messagebox.showerror('File not loaded', 'Load a music file first!')
 
 
 def stop_msc():
     mixer.music.stop()
+    statusBar['text'] = "Stopped Music"
 
 
 def vol_ctrl(val):
     volume = int(val)/100  # convert the val string to int 
     mixer.music.set_volume(volume)  # set_volume accepts values between 0 and 1
-   
+
 # ********************************************** End of multimedia functions *******************************************
 
 
@@ -60,13 +67,17 @@ root.config(menu=menuBar)
 def about():
     tkinter.messagebox.showinfo('Info', 'Music player written with Python.')
 
+
+def browse_music():
+    global filename
+    filename = filedialog.askopenfilename(filetypes=(("mp3 Music Files", "*.mp3"), ("m4a Music Files", "*.m4a")))
 # *********************************************** End of menu functions ************************************************
 
 
 # ************************************************* Submenu bar ********************************************************
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='File', menu=subMenu)  # for the menu bar
-subMenu.add_command(label='Open')  # create the drop down menu for File
+subMenu.add_command(label='Open', command=browse_music)  # create the drop down menu for File
 subMenu.add_command(label='Exit',  command=root.destroy)  # create the drop down menu for File
 
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
@@ -77,8 +88,10 @@ subMenu.add_command(label='About Software', command=about)  # create the drop do
 # ************************************************* End of Submenu bar *************************************************
 
 
-# **********************************************************************************************************************
-# **********************************************************************************************************************
+# *************************************************** Status bar *******************************************************
+statusBar = Label(root, text="Mp3 Player", relief=SUNKEN, anchor=W)
+statusBar.pack(side=BOTTOM, fill=X)
+# ************************************************* End of status bar **************************************************
 
 # **********************************************************************************************************************
 # **********************************************************************************************************************
