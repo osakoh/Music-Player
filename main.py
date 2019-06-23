@@ -43,7 +43,8 @@ stopBtn = Button(root, image=stopPhoto, command=stop_msc)
 stopBtn.pack()
 
 volScale = Scale(root, from_=0, to=125, orient=HORIZONTAL, command=vol_ctrl)
-volScale.set(80)
+volScale.set(45)  # volume isn't set to 45 yet, it's using a default volume in the mixer class
+mixer.music.set_volume(0.45)  # volume now set to 45
 volScale.pack()
 
 
@@ -66,7 +67,7 @@ def about():
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='File', menu=subMenu)  # for the menu bar
 subMenu.add_command(label='Open')  # create the drop down menu for File
-subMenu.add_command(label='Exit', command=root.destroy)  # create the drop down menu for File
+subMenu.add_command(label='Exit',  command=root.destroy)  # create the drop down menu for File
 
 subMenu = Menu(menuBar, tearoff=0)  # creates an empty dropdown menu
 menuBar.add_cascade(label='Help', menu=subMenu)  # for the menu bar
