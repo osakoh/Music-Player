@@ -21,15 +21,29 @@ txt.pack()
 # *************************************************** Multimedia functions *********************************************
 def play_msc():
     try:
-        mixer.music.load(filename)
-        mixer.music.play()
+        paused
+    except NameError:
+        try:
+            mixer.music.load(filename)
+            mixer.music.play()
+            statusBar['text'] = "Playing Music" + ' : ' + os.path.basename(filename)
+        except:
+            tkinter.messagebox.showerror('File not loaded', 'Load a music file first!')
+    else:
+        mixer.music.unpause()
         statusBar['text'] = "Playing Music" + ' : ' + os.path.basename(filename)
-    except:
-        tkinter.messagebox.showerror('File not loaded', 'Load a music file first!')
+
+
+def pause_msc():
+    global paused
+    paused = True
+    mixer.music.pause()
+    statusBar['text'] = "Paused"
 
 
 def stop_msc():
-    mixer.music.stop()
+    # mixer.music.stop()
+    mixer.music.fadeout(800)
     statusBar['text'] = "Stopped Music"
 
 
@@ -48,6 +62,10 @@ playBtn.pack()
 stopPhoto = PhotoImage(file='img/stop.png')
 stopBtn = Button(root, image=stopPhoto, command=stop_msc)
 stopBtn.pack()
+
+pausePhoto = PhotoImage(file='img/pause.png')
+pauseBtn = Button(root, image=pausePhoto, command=pause_msc)
+pauseBtn.pack()
 
 volScale = Scale(root, from_=0, to=125, orient=HORIZONTAL, command=vol_ctrl)
 volScale.set(45)  # volume isn't set to 45 yet, it's using a default volume in the mixer class
@@ -89,7 +107,7 @@ subMenu.add_command(label='About Software', command=about)  # create the drop do
 
 
 # *************************************************** Status bar *******************************************************
-statusBar = Label(root, text="Mp3 Player", relief=SUNKEN, anchor=W)
+statusBar = Label(root, text="Mp3 Player", relief=SUNKEN, anchor=W, font=("Arial ITALIC", 10))
 statusBar.pack(side=BOTTOM, fill=X)
 # ************************************************* End of status bar **************************************************
 
